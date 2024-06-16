@@ -1,55 +1,29 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Unity WebGL Player | star-connection</title>
-  <link rel="shortcut icon" href="TemplateData/favicon.ico">
-  <link rel="stylesheet" href="TemplateData/style.css">
-  <style>
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hidden; /* 防止页面滚动 */
-    }
-    #videoContainer {
-      position: absolute; /* 使用绝对定位 */
-      width: 1080px; /* 视频容器的宽度 */
-      height: 2400px; /* 视频容器的高度 */
-      top: 0;
-      left: 0;
-      z-index: 10; /* 确保视频在Canvas之上 */
-    }
-    #skipButton {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 100;
-    }
-    #unity-container {
-      position: relative; /* 设置相对定位作为Canvas和视频容器的父容器 */
-      width: 1080px;
-      height: 2400px;
-      margin: auto; /* 居中显示 */
-    }
-  </style>
-</head>
-<body>
-  <div id="videoContainer">
-    <iframe width="1080" height="2400" src="https://www.youtube.com/embed/35lBzEmYTJw" title="啟程轉何之手機啟動動畫" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    <button id="skipButton" onclick="skipVideo()">Skip</button>
-  </div>
-  <div id="unity-container" class="unity-desktop">
-    <!-- Unity 的内容 -->
-  </div>
-  <script>
-    function skipVideo() {
-      var videoContainer = document.getElementById("videoContainer");
-      videoContainer.style.display = "none"; // 隐藏视频容器
-      // 可以在这里添加其他逻辑，比如显示Unity WebGL的容器
-    }
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | star-connection</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+  </head>
+  <body>
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas" width=1080 height=2400 tabindex="-1"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+      <div id="unity-warning"> </div>
+      <div id="unity-footer">
+        <div id="unity-webgl-logo"></div>
+        <div id="unity-fullscreen-button"></div>
+        <div id="unity-build-title">star-connection</div>
+      </div>
+    </div>
+    <script>
 
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
