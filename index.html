@@ -27,25 +27,37 @@
 
       document.addEventListener('DOMContentLoaded', function() {
       // 定义一个函数来模拟点击操作
-      function simulateClick(x, y) {
-        var clickEvent = new MouseEvent('click', {
-          'view': window,
-          'bubbles': true,
-          'cancelable': false,
-          'screenX': x,
-          'screenY': y
+      function simulateTouch(x, y) {
+        var touchObj = new Touch({
+          identifier: Date.now(),
+          target: canvas,
+          clientX: x,
+          clientY: y,
+          radiusX: 2.5,
+          radiusY: 2.5,
+          rotationAngle: 10,
+          force: 0.5,
         });
-        // 将点击事件派发到 document 上，您也可以将其派发到任何特定的元素上
-        document.dispatchEvent(clickEvent);
-      }
-    
-      // 模拟两次点击操作
-      simulateClick(100, 100); // 第一次点击的屏幕位置（100, 100）
-      setTimeout(function() {
-        simulateClick(100, 100); // 第二次点击的屏幕位置（200, 200），稍微延迟执行以模拟连续点击
-      }, 500); // 500 毫秒后执行第二次点击
-    });
       
+        var touchEvent = new TouchEvent('touchstart', {
+          cancelable: true,
+          bubbles: true,
+          touches: [touchObj],
+          targetTouches: [],
+          changedTouches: [touchObj],
+          shiftKey: true,
+        });
+      
+        canvas.dispatchEvent(touchEvent);
+      }
+      
+      // 模拟触摸点击操作
+      document.addEventListener('DOMContentLoaded', function() {
+          simulateTouch(100, 100); // 第一次点击的屏幕位置（100, 100）
+          setTimeout(function() {
+            simulateTouch(100, 100); // 第二次点击的屏幕位置（200, 200），稍微延迟执行以模拟连续点击
+          }, 500); // 500 毫秒后执行第二次点击
+      });      
 
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
