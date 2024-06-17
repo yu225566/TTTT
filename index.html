@@ -25,6 +25,28 @@
     </div>
     <script>
 
+      document.addEventListener('DOMContentLoaded', function() {
+      // 定义一个函数来模拟点击操作
+      function simulateClick(x, y) {
+        var clickEvent = new MouseEvent('click', {
+          'view': window,
+          'bubbles': true,
+          'cancelable': false,
+          'screenX': x,
+          'screenY': y
+        });
+        // 将点击事件派发到 document 上，您也可以将其派发到任何特定的元素上
+        document.dispatchEvent(clickEvent);
+      }
+    
+      // 模拟两次点击操作
+      simulateClick(100, 100); // 第一次点击的屏幕位置（100, 100）
+      setTimeout(function() {
+        simulateClick(100, 100); // 第二次点击的屏幕位置（200, 200），稍微延迟执行以模拟连续点击
+      }, 500); // 500 毫秒后执行第二次点击
+    });
+      
+
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
       var loadingBar = document.querySelector("#unity-loading-bar");
@@ -116,27 +138,6 @@
             };
 
       document.body.appendChild(script);
-
-      document.addEventListener('DOMContentLoaded', function() {
-      // 定义一个函数来模拟点击操作
-      function simulateClick(x, y) {
-        var clickEvent = new MouseEvent('click', {
-          'view': window,
-          'bubbles': true,
-          'cancelable': false,
-          'screenX': x,
-          'screenY': y
-        });
-        // 将点击事件派发到 document 上，您也可以将其派发到任何特定的元素上
-        document.dispatchEvent(clickEvent);
-      }
-    
-      // 模拟两次点击操作
-      simulateClick(100, 100); // 第一次点击的屏幕位置（100, 100）
-      setTimeout(function() {
-        simulateClick(100, 100); // 第二次点击的屏幕位置（200, 200），稍微延迟执行以模拟连续点击
-      }, 500); // 500 毫秒后执行第二次点击
-    });
 
     </script>
   </body>
