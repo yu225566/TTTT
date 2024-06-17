@@ -116,51 +116,6 @@
 
       document.body.appendChild(script);
 
-
-      document.addEventListener('DOMContentLoaded', function() {
-      // 模拟触摸点击操作的函数
-      function simulateTouch(x, y) {
-        var touchObj = new Touch({
-          identifier: Date.now(),
-          target: canvas,
-          clientX: x,
-          clientY: y,
-          radiusX: 2.5,
-          radiusY: 2.5,
-          rotationAngle: 10,
-          force: 0.5,
-        });
-
-        var touchEvent = new TouchEvent('touchstart', {
-          cancelable: true,
-          bubbles: true,
-          touches: [touchObj],
-          targetTouches: [],
-          changedTouches: [touchObj],
-          shiftKey: true,
-        });
-
-        canvas.dispatchEvent(touchEvent);
-      }
-
-      // Unity 实例加载完成后的回调函数中调用 simulateTouch
-      createUnityInstance(canvas, config, (progress) => {
-        progressBarFull.style.width = 100 * progress + "%";
-      }).then((unityInstance) => {
-        loadingBar.style.display = "none";
-        fullscreenButton.onclick = () => {
-          unityInstance.SetFullscreen(1);
-        };
-        // 在 Unity 加载完成后模拟触摸点击
-        simulateTouch(100, 100);
-        setTimeout(function() {
-          simulateTouch(100, 100); // 模拟第二次点击
-        }, 500);
-      }).catch((message) => {
-        alert(message);
-      });
-    });
-
     </script>
   </body>
 </html>
